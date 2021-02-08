@@ -1,4 +1,5 @@
-print("Hello, World!")
+print("Hello, World! 🌍") #emoji inserido com botão windows + .
+
 nome = input("Escreva seu nome: ") #pega o dado do user
 print("É um prazer te conhecer, {}!".format(nome)) #format substitui o {} com a variável informada
 
@@ -18,7 +19,8 @@ n2 = int(input('Digite um número: '))
 n3 = n1 + n2
 print("A soma é {}".format(n3))
 
-""" ordem de precedencia:
+
+"""ordem de precedencia:
 1 - () | 2 - ** | 3 - * / // % | 4- + -
 
 """
