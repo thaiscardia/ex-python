@@ -2,8 +2,8 @@
 #calcule e mostre o comprimento da hipotenusa.
 a = float(input("Digite comprimento do cateto oposto: "))
 b = float(input("Digite comprimento do cateto adjacente: "))
-from math import sqrt as r
+from math import hypot as h
 
-hip = r((a ** 2) + (b ** 2))
+hip = h(a, b)
 
-print("A hipotenusa é {}".format(hip))
+print("A hipotenusa é {:.2f}".format(hip))
