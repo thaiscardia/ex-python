@@ -5,4 +5,4 @@ n3 = float(input("Digite terceiro número: "))
 
 l = [n1, n2, n3]
 
-print("O maior número é {} e o menor número é {}".format(max(l), min(l)))
+print("O \033[0;33;41mmaior\033[m número é {} e o \033[7;30;46mmenor\033[m número é {}".format(max(l), min(l)))
