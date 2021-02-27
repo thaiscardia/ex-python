@@ -1,40 +1,54 @@
 from matplotlib import pyplot as plt
 import csv
 
-#matplotlib é uma biblioteca EXCLUSIVA para geração de gráficos
-
-def carregarArquivo(arquivo):
-    return open(arquivo, newline="") #a função open permite abrir arquivos dentro do python, e o newline com a string vazia informa que não há separador especial de uma linha pra outra
-
-"""def obterDados(arquivo): #precisamos extrair os dados do arquivo... 
-    leitor = csv.DictReader(arquivo, delimiter=',') #dictreader faz a leitura dos arquivos e agrupa em dicionários
-    return leitor 
-    arquivo_csv = carregarArquivo('Outros\depression-dataset\data\scores.csv')
-dados = obterDados(arquivo_csv)
-print(next(dados)) 
-as classes implementadas em python podem implementar um metodo chamado __next__ para suportar esta função next(). Ou seja, o jeito recomendado para acessar o próximo item é chamando next(iterador)
-- - - Essa é uma forma de fazer. Hoje eu vi outra e então estou fazendo o update. Mas como é bom ter o conhecimento, fica as duas no código. #hatersgonnahate"""
-
 def obterDados(): #vamos utilizar um gerenciador de contexto, que deixa o arquivo aberto somente no bloco.
-    with open("Outros\depression-dataset\data\scores.csv") as f:
+    with open(".\depression-dataset\data\scores.csv") as f:
         return [genderData for genderData in csv.DictReader(f)] #estamos utilizando aqui um list comprehension
 
-def genCounterPerAgeGap(data):
+def genFem(data):
     counterF = {}
-    counterM = {}
 
     for gen in data:
         if gen['gender'] == '1':
             idadeF = gen['age']
             qtdF = counterF.get(idadeF, 0) + 1
             counterF.update({idadeF: qtdF})
-            print(counterF)
-        else:
-            idadeM = gen['age']
+    return counterF
+
+def genMale(data):
+    counterM = {}
+    for gend in data:
+        if gend['gender'] == '2':
+            idadeM = gend['age']
             qtdM = counterM.get(idadeM, 0) + 1
             counterM.update({idadeM: qtdM})
+    return counterM
 
-    return counterF, counterM
+def tupla_fem(femData, posicao):
+    val = []
+    for value in femData:
+        val.append(value[posicao])
+    return val
+
+def tupla_mas(masData, position):
+    valu = []
+    for quan in masData:
+        valu.append(quan[position])
+    return valu
 
 dados = obterDados()
-genCounterPerAgeGap(dados)
+
+feminino = genFem(dados) #contém age gap + qtd
+masculino = genMale(dados) #contém age gap + qtd
+
+dados_ordenados_femininos = sorted(genFem.items())
+dados_ordenados_masculinos = sorted(genMale.items())
+
+qtdFem = tupla_fem(dados_ordenados_femininos, 0)
+qtdMas = tupla_mas(dados_ordenados_masculinos, 0)
+
+ageFem = tupla_fem(dados_ordenados_femininos, 1)
+ageMas = tupla_mas(dados_ordenados_masculinos, 1)
+
+plt.plot(qtdFem, ageFem)
+plt.plot(qtdMas, ageMas)
