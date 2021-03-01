@@ -1,51 +1,65 @@
-from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 import csv
 
-def obterDados(): #vamos utilizar um gerenciador de contexto, que deixa o arquivo aberto somente no bloco.
-    with open(".\depression-dataset\data\scores.csv") as f:
-        return [genderData for genderData in csv.DictReader(f)] #estamos utilizando aqui um list comprehension
+def obterDados():
+    with open("scores.csv") as f:
+        return [dados_dep for dados_dep in csv.DictReader(f)]
 
-def genFem(data):
-    counterF = {}
+def contagem_mulheres(dados):
+    contador_feminino = {}
+    for genero in dados:
+        if genero['gender'] == '1':
+            idade = genero['age']
+            qtd = contador_feminino.get(idade, 0) + 1
+            contador_feminino.update({idade: qtd})
+    return contador_feminino
 
-    for gen in data:
-        if gen['gender'] == '1':
-            idadeF = gen['age']
-            qtdF = counterF.get(idadeF, 0) + 1
-            counterF.update({idadeF: qtdF})
-    return counterF
+def contagem_homens(dados):
+    contador_masculino = {}
+    for homem in dados:
+        if homem['gender'] == '2':
+            age = homem['age']
+            qtt = contador_masculino.get(age, 0) + 1
+            contador_masculino.update({age: qtt})
+    return contador_masculino
 
-def genMale(data):
-    counterM = {}
-    for gend in data:
-        if gend['gender'] == '2':
-            idadeM = gend['age']
-            qtdM = counterM.get(idadeM, 0) + 1
-            counterM.update({idadeM: qtdM})
-    return counterM
-
-def tupla_fem(femData, posicao):
+def tupla_feminina(lis_fem, position):
     val = []
-    for value in femData:
-        val.append(value[posicao])
+    for value in lis_fem:
+        val.append(value[position])
     return val
 
-def tupla_mas(masData, position):
-    valu = []
-    for quan in masData:
-        valu.append(quan[position])
-    return valu
+def tupla_masculina(lis_mas, posicao):
+    
+    valor = []
+    for i in lis_mas:
+        valor.append(i[posicao])
+    return valor
 
-dados = obterDados()
+#puxar os dados
+dep = obterDados()
 
-feminino = genFem(dados) #contém age gap + qtd
-masculino = genMale(dados) #contém age gap + qtd
+#contar a quantidade de individuos
+qtdMulherporIdade = contagem_mulheres(dep)
+qtdHomporIdade = contagem_homens(dep)
 
-dados_ordenados_femininos = sorted(genFem.items())
-dados_ordenados_masculinos = sorted(genMale.items())
+#organização dos dados
+x = sorted(qtdMulherporIdade.items()) #dados femininos organizados
+counts = sorted(qtdHomporIdade.items()) #dados masculinos organizados
 
-qtdFem = tupla_fem(dados_ordenados_femininos, 0)
-qtdMas = tupla_mas(dados_ordenados_masculinos, 0)
+#separação dos dados femininos
+anos = tupla_feminina(x, 0)
+quantidades = tupla_feminina(x, 1)
+print(anos)
+#separação dos dados masculinos
+anoM = tupla_masculina(counts, 0)
+quantidadeM = tupla_masculina(counts, 1)
+print(quantidadeM)
 
-ageFem = tupla_fem(dados_ordenados_femininos, 1)
-ageMas = tupla_mas(dados_ordenados_masculinos, 1)
+#constrói o gráfico
+average_age = quantidadeM
+bins = [15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70]
+plt.hist(average_age, bins, histtype='bar', rwidth=100)
+plt.xlabel("Idade")
+plt.ylabel("Quantidade de indivíduos")
+plt.show()
