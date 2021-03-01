@@ -49,6 +49,3 @@ qtdMas = tupla_mas(dados_ordenados_masculinos, 0)
 
 ageFem = tupla_fem(dados_ordenados_femininos, 1)
 ageMas = tupla_mas(dados_ordenados_masculinos, 1)
-
-plt.plot(qtdFem, ageFem)
-plt.plot(qtdMas, ageMas)
