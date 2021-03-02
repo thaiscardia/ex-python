@@ -73,3 +73,4 @@ plt.xlabel("Idade")
 plt.ylabel("Quantidade de indivíduos")
 
 plt.show()
+#plt.savefig("graficoDeprimidos.png")
