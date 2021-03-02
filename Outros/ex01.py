@@ -57,9 +57,19 @@ xHomem = tupla_masculina(counts, 0) #idade
 yHomem = tupla_masculina(counts, 1) #quantidade
 
 #constrói o gráfico
-plt.bar(xHomem, yMulher, color='r', label="Mulheres")
-plt.bar(xMulher, yHomem, color='b', label="Homens")
+plt.figure(figsize=(16,6))
+plt.suptitle("Indivíduos deprimidos por gênero de acordo com a Idade", ha='right')
+
+plt.subplot(131)
+plt.bar(xMulher, yMulher, color='r', label="Feminino")
+plt.legend()
 plt.xlabel("Idade")
 plt.ylabel("Quantidade de indivíduos")
-plt.title("Indivíduos deprimidos por gênero de acordo com a Idade")
+
+plt.subplot(132)
+plt.bar(xHomem, yHomem, color='b', label="Masculino")
+plt.legend()
+plt.xlabel("Idade")
+plt.ylabel("Quantidade de indivíduos")
+
 plt.show()
