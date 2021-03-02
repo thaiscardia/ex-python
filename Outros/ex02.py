@@ -2,7 +2,7 @@ from matplotlib import pyplot as plt
 import csv
 
 def obterDados():
-    with open(".\Outros\CarRentalData.csv") as f:
+    with open(".\CarRentalData.csv") as f:
         return [dado_carro for dado_carro in csv.DictReader(f)]
 
 def contar_carros_eletricos_por_ano(dados):
@@ -38,4 +38,4 @@ quantidades = pegar_dados_de_lista_de_tuplas(carros_ordenados, 1)
 plt.xlabel('Anos')
 plt.ylabel('Quantidade de Veículos Elétricos')
 plt.plot(anos, quantidades)
-plt.savefig('carroseletricosporano.png')
+plt.show()
