@@ -3,7 +3,7 @@ a = float(input("Digite comprimento da primeira reta: "))
 b = float(input("Digite comprimento da segunda reta: "))
 c = float(input("Digite comprimento da terceira reta: "))
 
-if a + b > c or a + c > b or b + c > a:
-    print("As medidas para os três segmentos informados \033[31mNÃO\033[m podem formar um triângulo")
+if a + b > c and a + c > b and b + c > a:
+    print("As medidas para os três segmentos informados \033[31mPODEM\033[m formar um triângulo")
 else:
-    print("A medida dos três segmentos informados \033[32mpodem\033[m formar um triângulo")
+    print("A medida dos três segmentos informados \033[32mNÃO PODEM\033[m formar um triângulo")
