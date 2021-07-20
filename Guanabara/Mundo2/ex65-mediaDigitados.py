@@ -5,19 +5,16 @@ from time import sleep
 
 
 num = int(input("Insira número: "))
+continuar = str(input("Deseja continuar? [S/N] \n")).strip().upper()[0]
 lista = [num]
 contador = 1
-continuar = str(input("Deseja continuar? \n")).strip().upper()[0]
 media = 0
 
-while continuar not in "Y":
+while continuar == "S":
     num = int(input("Número inserido. Insira número: "))
+    continuar = str(input("Deseja continuar? \n")).strip().upper()[0]
     lista.append(num)
     contador += 1
-    continuar = str(input("Deseja continuar? \n")).strip().upper()[0]
-elif continuar in "N" and continuar not in "Y":
-    sleep(2)
-    media = sum(lista)/contador
-    print("Programa encerrado com sucesso!")
-    print("A média de valores é de {}. O valor mais alto digitado foi {} e o mais baixo foi {}.".format(media, max(lista), min(lista)))
-else: print("Opção inválida. Tente novamente.")
+soma = sum(lista)
+media = soma/contador
+print("A média de valores é de {}. O valor mais alto digitado foi {} e o mais baixo foi {}.".format(media, max(lista), min(lista)))
